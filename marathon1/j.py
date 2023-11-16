@@ -1,0 +1,1 @@
+print(3 * int(((int(input()) + 1) / 2)))
