@@ -1,16 +1,12 @@
-# 2H:  Implement DistanceBetweenPatternAndStrings
-
-def hamming_dist(dna, p):
-    return sum(x != y for x, y in zip(dna, p))
+def hamming_dist(a, b):
+    return sum(x != y for x, y in zip(a, b))
 
 
-def pattern_and_string_dist(pattern, dns):
-    return sum(
-        min(hamming_dist(dna[i: i + len(pattern)], pattern) for i in range(len(dna) - len(pattern) + 1)) for dna in dns)
+pattern = input()
+dnas = input()
+dnas = dnas.split(' ')
 
+distance = sum(
+    min(hamming_dist(pattern, dna[i: i + len(pattern)]) for i in range(len(dna) - len(pattern) + 1)) for dna in dnas)
 
-pattern = "AAA"
-dnas = ["TTACCTTAAC", "GATATCTGTC", "ACGGCGTTCG", "CCCTAAAGAG", "CGTCAGAGGT"]
-
-distance = pattern_and_string_dist(pattern, dnas)
 print(distance)

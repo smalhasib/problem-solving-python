@@ -1,21 +1,16 @@
-# 3E: construct the de bruijn graph of a collection of k mers
-
 from collections import defaultdict
 
-kmers = [
-    "GAGG",
-    "CAGG",
-    "GGGG",
-    "GGGA",
-    "CAGG",
-    "AGGG",
-    "GGAG"
-]
+kmers = []
+while True:
+    line = input()
+    if not line:
+        break
+    kmers.append(line)
 
-dicts = defaultdict(list)
-
+graph = defaultdict(list)
 for kmer in kmers:
-    dicts[kmer[:-1]].append(kmer[1:])
+    graph[kmer[:-1]].append(kmer[1:])
 
-for k, items in dicts.items():
-    print(f'{k} -> ' + ','.join(items))
+with open('out.txt', 'w') as file:
+    for k, value in graph.items():
+        file.write(f'{k} -> ' + ','.join(value) + '\n')

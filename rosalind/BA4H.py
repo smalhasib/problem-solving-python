@@ -1,21 +1,25 @@
-# 4H : Generate the convolution of a spectrum
-
 from collections import defaultdict
 
-spectrum = "0 137 186 323"
+
+def compare(item):
+    return item[0], -item[1]
+
+
+spectrum = input()
 spectrum = list(map(int, spectrum.split()))
 
-diff = defaultdict(int)
+dict_s = defaultdict(int)
 
 for i in spectrum:
     for j in spectrum:
         d = i - j
         if d > 0:
-            diff[d] += 1
+            dict_s[d] += 1
 
-list_of_diff = [(base, key) for key, base in diff.items()]
-list_of_diff.sort()
+list_of_diff = [(value, index) for index, value in dict_s.items()]
+list_of_diff.sort(key=compare)
 
-result = [base for key, base in reversed(list_of_diff) for _ in range(key)]
+result = [value for index, value in reversed(list_of_diff) for _ in range(index)]
 
-print(' '.join(map(str, result)))
+with open('out.txt', 'w') as file:
+    file.write(' '.join(map(str, result)))
