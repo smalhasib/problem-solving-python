@@ -1,23 +1,21 @@
-nums1 = [1]
-nums2 = []
-m = 1
-n = 0
+from typing import List
 
-if n == 0:
-    print(nums1)
-else:
-    res, i, j = [], 0, 0
-    while m != 0 and n != 0 and i < m:
-        while nums1[i] != 0 and nums1[i] <= nums2[j]:
-            res.append(nums1[i])
-            i += 1
-        if nums1[i] == 0:
-            break
-        res.append(nums2[j])
-        j += 1
 
-    if j < n:
-        res += nums2[j:]
+class Solution:
+    def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
+        if n == 0:
+            return
+        k = m + n
+        while n > 0 and m > 0:
+            if nums1[m - 1] >= nums2[n - 1]:
+                nums1[k - 1] = nums1[m - 1]
+                m -= 1
+            else:
+                nums1[k - 1] = nums2[n - 1]
+                n -= 1
+            k -= 1
 
-    nums1.clear()
-    print(nums1)
+        while n > 0:
+            nums1[k - 1] = nums2[n - 1]
+            k -= 1
+            n -= 1
